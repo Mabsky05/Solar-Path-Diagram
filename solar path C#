@@ -5,6 +5,34 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SolarPath
+public class Program
 {
- class Program
+	public static void Main()
+	{
+		//convert degree input to radians
+		double cdr = (Math.PI / 180);
+		
+		//Latitude (LAT) is an input
+		double LAT = 0.0;
+		
+		//Create list of Declinations (DEC)
+		List<double> DEC = new List<double>();
+		DEC.Add(-23.45);  /*December 22*/
+		DEC.Add(-18.00);  /*November 11 & January 30*/
+		DEC.Add(-09.00);  /*October 14 & February 27*/
+		DEC.Add(0.00);    /*March 21 & September 23*/
+		DEC.Add(09.00);   /*April 14 & August 28*/
+		DEC.Add(18.00);   /*May 12 & August 1*/
+		DEC.Add(23.45);   /*June 22*/
+		
+		//Create list of Altitudes minus current LAT (ALT)
+		List<double> ALT = new List<double>();
+		ALT.Add(90.00 - LAT - 23.45);
+		ALT.Add(90.00 - LAT - 18.00);
+		ALT.Add(90.00 - LAT - 09.00);
+		ALT.Add(90.00);
+		ALT.Add(90.00 - LAT + 09.00);
+		ALT.Add(90.00 - LAT + 18.00);
+		ALT.Add(90.00 - LAT + 23.45);
+	}
 }
