@@ -9,9 +9,11 @@ public class Program
 {
 	public static void Main()
 	{
+		//TO INCLUDE
+		Console.WriteLine("Enter Latitude"); /*Setup input for latitude*/
+		double r = 1.0; /*convert this into input*/
 		//convert degree input to radians
-		double cdr = (Math.PI / 180);
-		
+		double cdr = (Math.PI / 180.0);
 		//Latitude (LAT) is an input
 		double LAT = 0.0;
 		
@@ -34,5 +36,31 @@ public class Program
 		ALT.Add(90.00 - LAT + 09.00);
 		ALT.Add(90.00 - LAT + 18.00);
 		ALT.Add(90.00 - LAT + 23.45);
+
+		//Add values to RS list
+		//rs = r * Cos(d) / (Sin(LAT) + Sin(d)) 
+		List<double> RS_input = new List<double>();
+		foreach (double d in DEC) {
+			rs_input.add(r * Math.Cos(d * cdr) / (Math.Sin(LAT * cdr) + Math.Sin(d * cdr)));
+		}
+
+		//Create DS list (distance of rs to centre)
+		//ds = r * Cos(LAT) / (Sin(LAT) + Sin(DEC))
+		double DS = ((r * Math.Cos(LAT * cdr)) / (Math.Sin(LAT * cdr) + Math.Sin(DEC[0] * cdr)));
+		double DS1 = ((r * Math.Cos(LAT * cdr)) / (Math.Sin(LAT * cdr) + Math.Sin(DEC[1] * cdr)));
+		double DS2 = ((r * Math.Cos(LAT * cdr)) / (Math.Sin(LAT * cdr) + Math.Sin(DEC[2] * cdr)));
+
+		
+		//Create DT (distance of hour line from centre)
+		double DT_input = (r * Math.Tan(LAT * cdr));
+
+		//Create HRA (hour line) values
+		List<int> HRA = new List<int>();
+		int i = 15;
+		for(i = -90; i <= 90; i += 15)
+		{
+		HRA.Add(i);
+		}
+		
 	}
 }
